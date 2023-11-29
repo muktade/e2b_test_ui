@@ -1,7 +1,12 @@
 import 'dart:async';
 
+import 'package:b2e_test_ui/classes/navigation_bloc.dart';
+import 'package:b2e_test_ui/widgets/menu_item.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rxdart/rxdart.dart';
+
+import '../classes/custom_menu_clipper.dart';
 
 class SideBar extends StatefulWidget {
   const SideBar({super.key});
@@ -48,29 +53,89 @@ class _SideBarState extends State<SideBar>
           duration: _animationDuration,
           top: 0.0,
           bottom: 0.0,
-          left: isSidebarOpenAsync.data! ? 0 : 0,
+          left: isSidebarOpenAsync.data! ? 0 : -width,
           right: isSidebarOpenAsync.data! ? 0 : width - 40,
           child: Row(
             children: <Widget>[
               Expanded(
                 child: Container(
+                  // padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   color: const Color(0xFF262AAA),
+                  child: Column(
+                    children: [
+                      const SizedBox(
+                        height: 100.0,
+                      ),
+                      const ListTile(
+                        title: Text(
+                          'E2B Distionary',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 32.0,
+                            fontWeight: FontWeight.w900,
+                          ),
+                        ),
+                        subtitle: Text(
+                          'English To Bangle Dictionary',
+                          style: TextStyle(
+                            color: Color(0xFF1BB5FD),
+                            fontSize: 16.0,
+                          ),
+                        ),
+                        leading: CircleAvatar(
+                          radius: 40.0,
+                          child: Icon(
+                            Icons.perm_identity,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                      Divider(
+                        height: 64.0,
+                        thickness: 0.5,
+                        color: Colors.white.withOpacity(0.8),
+                        indent: 32.0,
+                        endIndent: 32.0,
+                      ),
+                      MenuItem(
+                        icon: Icons.menu,
+                        title: 'Home',
+                        onTap: () {
+                          onIconPassed();
+                          BlocProvider.of<NavigationBloc>(context)
+                              .add(NavigationEvent.homePageClickEvent);
+                        },
+                      ),
+                      MenuItem(
+                        icon: Icons.search_sharp,
+                        title: 'Search',
+                        onTap: () {
+                          onIconPassed();
+                          BlocProvider.of<NavigationBloc>(context)
+                              .add(NavigationEvent.testPageClickEvent);
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ),
               Align(
                 alignment: Alignment(0, -height * 0.00104),
                 child: GestureDetector(
                   onTap: () => onIconPassed(),
-                  child: Container(
-                    width: 35.0,
-                    height: 110.0,
-                    color: const Color(0xFF262AAA),
-                    alignment: Alignment.centerLeft,
-                    child: AnimatedIcon(
-                      progress: _animationController.view,
-                      icon: AnimatedIcons.menu_arrow,
-                      color: const Color(0xFF1BB5FD),
-                      size: 25.0,
+                  child: ClipPath(
+                    clipper: CustomMenuClipper(),
+                    child: Container(
+                      width: 35.0,
+                      height: 110.0,
+                      color: const Color(0xFF262AAA),
+                      alignment: Alignment.centerLeft,
+                      child: AnimatedIcon(
+                        progress: _animationController.view,
+                        icon: AnimatedIcons.menu_arrow,
+                        color: const Color(0xFF1BB5FD),
+                        size: 25.0,
+                      ),
                     ),
                   ),
                 ),
