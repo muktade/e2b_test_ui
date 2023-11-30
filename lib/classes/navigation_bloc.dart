@@ -1,3 +1,4 @@
+import 'package:b2e_test_ui/pages/about_us_page.dart';
 import 'package:b2e_test_ui/pages/home_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -17,6 +18,9 @@ class NavigationBloc extends Bloc<NavigationEvent, NavigationStates> {
         case NavigationEvent.testPageClickEvent:
           emit(const TestPage());
           break;
+        case NavigationEvent.aboutUsClickEvent:
+          emit(const AboutUsPage());
+          break;
         default:
           emit(const HomePage());
           break;
@@ -31,4 +35,8 @@ class NavigationBloc extends Bloc<NavigationEvent, NavigationStates> {
 
 abstract class NavigationStates {}
 
-enum NavigationEvent { homePageClickEvent, testPageClickEvent }
+enum NavigationEvent {
+  homePageClickEvent,
+  testPageClickEvent,
+  aboutUsClickEvent
+}

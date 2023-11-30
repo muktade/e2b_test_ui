@@ -117,6 +117,23 @@ class _SideBarState extends State<SideBar>
                               .add(NavigationEvent.testPageClickEvent);
                         },
                       ),
+                      Expanded(
+                        child: Align(
+                          alignment: FractionalOffset.bottomCenter,
+                          child: Padding(
+                            padding: EdgeInsets.only(bottom: 10),
+                            child: MenuItem(
+                              icon: Icons.person_2_sharp,
+                              title: 'About Us',
+                              onTap: () {
+                                onIconPassed();
+                                BlocProvider.of<NavigationBloc>(context)
+                                    .add(NavigationEvent.aboutUsClickEvent);
+                              },
+                            ),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
