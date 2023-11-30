@@ -59,6 +59,8 @@ class _SideBarState extends State<SideBar>
             children: <Widget>[
               Expanded(
                 child: Container(
+                  width: width - 135.0,
+
                   // padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   color: const Color(0xFF262AAA),
                   child: Column(
@@ -68,7 +70,7 @@ class _SideBarState extends State<SideBar>
                       ),
                       const ListTile(
                         title: Text(
-                          'E2B Distionary',
+                          'E2B Dictionary',
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 32.0,
@@ -119,6 +121,7 @@ class _SideBarState extends State<SideBar>
                   ),
                 ),
               ),
+
               Align(
                 alignment: Alignment(0, -height * 0.00104),
                 child: GestureDetector(
@@ -139,7 +142,13 @@ class _SideBarState extends State<SideBar>
                     ),
                   ),
                 ),
-              )
+              ),
+              // isSidebarOpenAsync.data!
+              //     ? Container(
+              //         color: Colors.black.withOpacity(0.2),
+              //         width: 100,
+              //       )
+              // : Container(),
             ],
           ),
         );
