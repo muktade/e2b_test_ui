@@ -121,7 +121,7 @@ class _SideBarState extends State<SideBar>
                         child: Align(
                           alignment: FractionalOffset.bottomCenter,
                           child: Padding(
-                            padding: EdgeInsets.only(bottom: 10),
+                            padding: const EdgeInsets.only(bottom: 10),
                             child: MenuItem(
                               icon: Icons.person_2_sharp,
                               title: 'About Us',
