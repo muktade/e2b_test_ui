@@ -58,8 +58,8 @@ class _SideBarState extends State<SideBar>
           child: Row(
             children: <Widget>[
               Expanded(
-                child: Container(
-                  width: width - 135.0,
+                child: Material(
+                  // width: width - 135.0,
 
                   // padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   color: const Color(0xFF262AAA),
@@ -121,16 +121,39 @@ class _SideBarState extends State<SideBar>
                         child: Align(
                           alignment: FractionalOffset.bottomCenter,
                           child: Padding(
-                            padding: const EdgeInsets.only(bottom: 10),
-                            child: MenuItem(
-                              icon: Icons.person_2_sharp,
-                              title: 'About Us',
+                            padding: const EdgeInsets.only(
+                                bottom: 10, right: 35.0, left: 35.0),
+                            child: ListTile(
                               onTap: () {
                                 onIconPassed();
                                 BlocProvider.of<NavigationBloc>(context)
-                                    .add(NavigationEvent.aboutUsClickEvent);
+                                    .add(NavigationEvent.testPageClickEvent);
                               },
+                              leading: const Icon(
+                                Icons.settings,
+                                size: 20.0,
+                                color: Colors.cyan,
+                              ),
+                              title: const Text(
+                                'About Me',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20.0,
+                                  fontWeight: FontWeight.w300,
+                                ),
+                              ),
                             ),
+
+                            //     MenuItem(
+                            //   icon: Icons.person_2_sharp,
+                            //   title: 'About Us',
+                            //   onTap: () {
+                            //     onIconPassed();
+                            //     BlocProvider.of<NavigationBloc>(context)
+                            //         .add(NavigationEvent.aboutUsClickEvent);
+                            //   },
+                            // ),
                           ),
                         ),
                       ),
@@ -138,7 +161,6 @@ class _SideBarState extends State<SideBar>
                   ),
                 ),
               ),
-
               Align(
                 alignment: Alignment(0, -height * 0.00104),
                 child: GestureDetector(
@@ -160,12 +182,6 @@ class _SideBarState extends State<SideBar>
                   ),
                 ),
               ),
-              // isSidebarOpenAsync.data!
-              //     ? Container(
-              //         color: Colors.black.withOpacity(0.2),
-              //         width: 100,
-              //       )
-              // : Container(),
             ],
           ),
         );
