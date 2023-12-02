@@ -22,6 +22,7 @@ class _SideBarState extends State<SideBar>
   late Stream<bool> isSidebarOpenedStream;
   late StreamSink<bool> isSidebarOpenSink;
   final _animationDuration = const Duration(milliseconds: 500);
+  var isSelected = '';
 
   @override
   void initState() {
@@ -99,23 +100,39 @@ class _SideBarState extends State<SideBar>
                         indent: 32.0,
                         endIndent: 32.0,
                       ),
-                      MenuItem(
-                        icon: Icons.menu,
-                        title: 'Home',
-                        onTap: () {
-                          onIconPassed();
-                          BlocProvider.of<NavigationBloc>(context)
-                              .add(NavigationEvent.homePageClickEvent);
-                        },
+                      Container(
+                        color: isSelected == 'homePageClickEvent'
+                            ? const Color.fromARGB(255, 0, 5, 143)
+                            : null,
+                        child: MenuItem(
+                          icon: Icons.menu,
+                          title: 'Home',
+                          onTap: () {
+                            setState(() {
+                              isSelected = 'homePageClickEvent';
+                            });
+                            onIconPassed();
+                            BlocProvider.of<NavigationBloc>(context)
+                                .add(NavigationEvent.homePageClickEvent);
+                          },
+                        ),
                       ),
-                      MenuItem(
-                        icon: Icons.search_sharp,
-                        title: 'Search',
-                        onTap: () {
-                          onIconPassed();
-                          BlocProvider.of<NavigationBloc>(context)
-                              .add(NavigationEvent.testPageClickEvent);
-                        },
+                      Container(
+                        color: isSelected == 'testPageClickEvent'
+                            ? const Color.fromARGB(255, 0, 5, 143)
+                            : null,
+                        child: MenuItem(
+                          icon: Icons.search_sharp,
+                          title: 'Search',
+                          onTap: () {
+                            setState(() {
+                              isSelected = 'testPageClickEvent';
+                            });
+                            onIconPassed();
+                            BlocProvider.of<NavigationBloc>(context)
+                                .add(NavigationEvent.testPageClickEvent);
+                          },
+                        ),
                       ),
                       Expanded(
                         child: Align(
@@ -123,24 +140,32 @@ class _SideBarState extends State<SideBar>
                           child: Padding(
                             padding: const EdgeInsets.only(
                                 bottom: 10, right: 35.0, left: 35.0),
-                            child: ListTile(
-                              onTap: () {
-                                onIconPassed();
-                                BlocProvider.of<NavigationBloc>(context)
-                                    .add(NavigationEvent.aboutUsClickEvent);
-                              },
-                              // leading: const Icon(
-                              //   Icons.settings,
-                              //   size: 20.0,
-                              //   color: Colors.cyan,
-                              // ),
-                              title: const Text(
-                                'About Me',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20.0,
-                                  fontWeight: FontWeight.w300,
+                            child: Container(
+                              color: isSelected == 'aboutUsClickEvent'
+                                  ? const Color.fromARGB(255, 0, 5, 143)
+                                  : null,
+                              child: ListTile(
+                                onTap: () {
+                                  setState(() {
+                                    isSelected = 'aboutUsClickEvent';
+                                  });
+                                  onIconPassed();
+                                  BlocProvider.of<NavigationBloc>(context)
+                                      .add(NavigationEvent.aboutUsClickEvent);
+                                },
+                                // leading: const Icon(
+                                //   Icons.settings,
+                                //   size: 20.0,
+                                //   color: Colors.cyan,
+                                // ),
+                                title: const Text(
+                                  'About Me',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.w300,
+                                  ),
                                 ),
                               ),
                             ),
@@ -154,7 +179,13 @@ class _SideBarState extends State<SideBar>
               Align(
                 alignment: Alignment(0, -height * 0.00104),
                 child: GestureDetector(
-                  onTap: () => onIconPassed(),
+                  onTap: () {
+                    onIconPassed();
+                    setState(() {
+                      print('isSelected');
+                      print(isSelected);
+                    });
+                  },
                   child: ClipPath(
                     clipper: CustomMenuClipper(),
                     child: Container(
