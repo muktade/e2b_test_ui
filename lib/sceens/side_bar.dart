@@ -127,13 +127,13 @@ class _SideBarState extends State<SideBar>
                               onTap: () {
                                 onIconPassed();
                                 BlocProvider.of<NavigationBloc>(context)
-                                    .add(NavigationEvent.testPageClickEvent);
+                                    .add(NavigationEvent.aboutUsClickEvent);
                               },
-                              leading: const Icon(
-                                Icons.settings,
-                                size: 20.0,
-                                color: Colors.cyan,
-                              ),
+                              // leading: const Icon(
+                              //   Icons.settings,
+                              //   size: 20.0,
+                              //   color: Colors.cyan,
+                              // ),
                               title: const Text(
                                 'About Me',
                                 textAlign: TextAlign.center,
@@ -144,16 +144,6 @@ class _SideBarState extends State<SideBar>
                                 ),
                               ),
                             ),
-
-                            //     MenuItem(
-                            //   icon: Icons.person_2_sharp,
-                            //   title: 'About Us',
-                            //   onTap: () {
-                            //     onIconPassed();
-                            //     BlocProvider.of<NavigationBloc>(context)
-                            //         .add(NavigationEvent.aboutUsClickEvent);
-                            //   },
-                            // ),
                           ),
                         ),
                       ),
