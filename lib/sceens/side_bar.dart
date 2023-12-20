@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:b2e_test_ui/classes/navigation_bloc.dart';
+import 'package:b2e_test_ui/value/all_dynamic_value.dart';
 import 'package:b2e_test_ui/widgets/menu_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -44,8 +45,8 @@ class _SideBarState extends State<SideBar>
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
+    final height = AllDynamicValue().getHeight(context);
+    final width = AllDynamicValue().getWidth(context);
     return StreamBuilder<bool>(
       initialData: false,
       stream: isSidebarOpenedStream,
@@ -102,7 +103,7 @@ class _SideBarState extends State<SideBar>
                       ),
                       Container(
                         color: isSelected == 'homePageClickEvent'
-                            ? const Color.fromARGB(255, 0, 5, 143)
+                            ? AllDynamicValue().appSidebarColor
                             : null,
                         child: MenuItem(
                           icon: Icons.menu,
@@ -119,7 +120,7 @@ class _SideBarState extends State<SideBar>
                       ),
                       Container(
                         color: isSelected == 'testPageClickEvent'
-                            ? const Color.fromARGB(255, 0, 5, 143)
+                            ? AllDynamicValue().appSidebarColor
                             : null,
                         child: MenuItem(
                           icon: Icons.search_sharp,
@@ -142,7 +143,7 @@ class _SideBarState extends State<SideBar>
                                 bottom: 10, right: 35.0, left: 35.0),
                             child: Container(
                               color: isSelected == 'aboutUsClickEvent'
-                                  ? const Color.fromARGB(255, 0, 5, 143)
+                                  ? AllDynamicValue().appSidebarColor
                                   : null,
                               child: ListTile(
                                 onTap: () {
@@ -183,22 +184,38 @@ class _SideBarState extends State<SideBar>
                     onIconPassed();
                     setState(() {
                       print('isSelected');
-                      print(isSelected);
                     });
                   },
-                  child: ClipPath(
-                    clipper: CustomMenuClipper(),
-                    child: Container(
-                      width: 35.0,
-                      height: 110.0,
-                      color: const Color(0xFF262AAA),
-                      alignment: Alignment.centerLeft,
-                      child: AnimatedIcon(
-                        progress: _animationController.view,
-                        icon: AnimatedIcons.menu_arrow,
-                        color: const Color(0xFF1BB5FD),
-                        size: 25.0,
-                      ),
+                  child: Container(
+                    color: isSidebarOpenAsync.data!
+                        ? AllDynamicValue().appHomeShadow
+                        : null,
+                    height: AllDynamicValue().getHeight(context),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      // mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Container(
+                          height: 30.0,
+                          color: Colors.black,
+                          // ),
+                        ),
+                        ClipPath(
+                          clipper: CustomMenuClipper(),
+                          child: Container(
+                            width: 35.0,
+                            height: 110.0,
+                            color: AllDynamicValue().appSidebarColor,
+                            alignment: Alignment.centerLeft,
+                            child: AnimatedIcon(
+                              progress: _animationController.view,
+                              icon: AnimatedIcons.menu_arrow,
+                              color: const Color(0xFF1BB5FD),
+                              size: 25.0,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
