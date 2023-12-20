@@ -95,23 +95,43 @@ class HomeHeader extends StatelessWidget {
                               color: Colors.grey,
                             ),
                           ),
-                          child: Row(
-                            children: [
-                              const SizedBox(
-                                width: 10.0,
+                          child: TextField(
+                            decoration: InputDecoration(
+                              contentPadding: const EdgeInsets.only(
+                                  left: 20.0, bottom: 10.0),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20.0),
+                                borderSide: const BorderSide(width: 0.8),
                               ),
-                              const Icon(
-                                Icons.search,
-                                color: Colors.grey,
-                              ),
-                              const SizedBox(
-                                width: 10.0,
-                              ),
-                              Text(
-                                'Search Text',
-                                style: Theme.of(context).textTheme.bodyMedium,
-                              ),
-                            ],
+                              hintText: 'Search Text...',
+                              prefixIcon: const Icon(Icons.search),
+                              //  IconButton(
+                              //   onPressed: () {
+                              //     print('object');
+                              //   },
+                              //   icon: const Icon(Icons.search),
+                              // ),
+                              focusColor: Colors.black,
+                            ),
+
+                            // child: Row(
+                            //   children: [
+                            //     const SizedBox(
+                            //       width: 10.0,
+                            //     ),
+                            //     const Icon(
+                            //       Icons.search,
+                            //       color: Colors.grey,
+                            //     ),
+                            //     const SizedBox(
+                            //       width: 10.0,
+                            //     ),
+                            //     Text(
+                            //       'Search Text',
+                            //       style: Theme.of(context).textTheme.bodyMedium,
+                            //     ),
+                            //   ],
+                            // ),
                           ),
                         ),
                         const SizedBox(width: 15.0),
