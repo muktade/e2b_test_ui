@@ -22,10 +22,10 @@ class HomePage extends StatelessWidget implements NavigationStates {
 
 class HomeHeader extends StatelessWidget {
   const HomeHeader({
-    super.key,
+    Key? key, // Fix: Add 'Key? key'
     required this.height,
     required this.width,
-  });
+  }) : super(key: key); // Fix: Call the super constructor with 'key'
 
   final double height;
   final double width;
@@ -43,13 +43,6 @@ class HomeHeader extends StatelessWidget {
               color: AllDynamicValue().appHomeColor,
               child: Stack(
                 children: [
-                  // Positioned(
-                  //   top: 0,
-                  //   child: HomeHeader(
-                  //     height: height,
-                  //     width: width,
-                  //   ),
-                  // ),
                   Positioned(
                     right: 0,
                     child: Container(
@@ -58,13 +51,11 @@ class HomeHeader extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: AllDynamicValue().appHomed1,
                         borderRadius: const BorderRadius.only(
-                          // topLeft: Radius.circular(100.0),
                           bottomLeft: Radius.circular(300.0),
                         ),
                       ),
                     ),
                   ),
-
                   Positioned(
                     right: 0,
                     child: Container(
@@ -73,15 +64,13 @@ class HomeHeader extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: AllDynamicValue().appHomed2,
                         borderRadius: const BorderRadius.only(
-                          // topLeft: Radius.circular(100.0),
                           bottomLeft: Radius.circular(300.0),
                         ),
                       ),
                     ),
                   ),
-
                   Positioned(
-                    top: height * 0.3 * 0.6,
+                    top: height * 0.3 * 0.45,
                     child: Row(
                       children: [
                         const SizedBox(width: 15.0),
@@ -105,37 +94,65 @@ class HomeHeader extends StatelessWidget {
                               ),
                               hintText: 'Search Text...',
                               prefixIcon: const Icon(Icons.search),
-                              //  IconButton(
-                              //   onPressed: () {
-                              //     print('object');
-                              //   },
-                              //   icon: const Icon(Icons.search),
-                              // ),
                               focusColor: Colors.black,
                             ),
-
-                            // child: Row(
-                            //   children: [
-                            //     const SizedBox(
-                            //       width: 10.0,
-                            //     ),
-                            //     const Icon(
-                            //       Icons.search,
-                            //       color: Colors.grey,
-                            //     ),
-                            //     const SizedBox(
-                            //       width: 10.0,
-                            //     ),
-                            //     Text(
-                            //       'Search Text',
-                            //       style: Theme.of(context).textTheme.bodyMedium,
-                            //     ),
-                            //   ],
-                            // ),
                           ),
                         ),
                         const SizedBox(width: 15.0),
                       ],
+                    ),
+                  ),
+                  Positioned(
+                    top: height * 0.3 * 0.65,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 30.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Search Result',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w400,
+                              fontSize: 20.0,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          SizedBox(
+                            height: 80.0,
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: List.generate(
+                                  10,
+                                  (index) => const Column(
+                                    children: [
+                                      SizedBox(
+                                        width: 46,
+                                        height: 46,
+                                        child: CircleAvatar(
+                                          backgroundImage: AssetImage(
+                                              'assets/images/001.jpg'),
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        width: 55.0,
+                                      ),
+                                      const Text(
+                                        'Text',
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],
